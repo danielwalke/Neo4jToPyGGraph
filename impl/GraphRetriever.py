@@ -53,63 +53,11 @@ class GraphRetriever(NeoDriver):
 
         """
         print("Start loading the graph")
-        self.node_types = ['Disease', 'Tissue', 'Biological_process', 'Molecular_function', 'Cellular_component', 'Modification',
-         'Phenotype', 'Experiment', 'Experimental_factor', 'Units', 'Chromosome', 'Gene', 'Transcript', 'Protein',
-         'Amino_acid_sequence', 'Peptide', 'User', 'Project', 'Subject', 'Biological_sample', 'Analytical_sample',
-         'Modified_protein', 'Clinical_variable', 'Complex', 'Food', 'Known_variant', 'Clinically_relevant_variant',
-         'Publication', 'Functional_region', 'Metabolite', 'Protein_structure', 'GWAS_study', 'Pathway', 'Drug']
-        self.edge_types = [('Disease', 'HAS_PARENT', 'Disease'), ('Experimental_factor', 'MAPS_TO', 'Disease'),
-         ('Modified_protein', 'ASSOCIATED_WITH', 'Disease'), ('Protein', 'ASSOCIATED_WITH', 'Disease'),
-         ('Clinically_relevant_variant', 'ASSOCIATED_WITH', 'Disease'),
-         ('Protein', 'IS_BIOMARKER_OF_DISEASE', 'Disease'), ('Metabolite', 'ASSOCIATED_WITH', 'Disease'),
-         ('Protein', 'DETECTED_IN_PATHOLOGY_SAMPLE', 'Disease'), ('Project', 'STUDIES_DISEASE', 'Disease'),
-         ('Tissue', 'HAS_PARENT', 'Tissue'), ('Protein', 'ASSOCIATED_WITH', 'Tissue'),
-         ('Protein', 'IS_QCMARKER_IN_TISSUE', 'Tissue'), ('Project', 'STUDIES_TISSUE', 'Tissue'),
-         ('Protein', 'ASSOCIATED_WITH', 'Biological_process'),
-         ('Biological_process', 'HAS_PARENT', 'Biological_process'),
-         ('Complex', 'ASSOCIATED_WITH', 'Biological_process'),
-         ('Modified_protein', 'ASSOCIATED_WITH', 'Biological_process'),
-         ('Protein', 'ASSOCIATED_WITH', 'Molecular_function'),
-         ('Molecular_function', 'HAS_PARENT', 'Molecular_function'),
-         ('Protein', 'ASSOCIATED_WITH', 'Cellular_component'),
-         ('Cellular_component', 'HAS_PARENT', 'Cellular_component'), ('Modification', 'HAS_PARENT', 'Modification'),
-         ('Modified_protein', 'HAS_MODIFICATION', 'Modification'), ('Phenotype', 'HAS_PARENT', 'Phenotype'),
-         ('Experimental_factor', 'MAPS_TO', 'Phenotype'), ('Experiment', 'HAS_PARENT', 'Experiment'),
-         ('GWAS_study', 'STUDIES_TRAIT', 'Experimental_factor'),
-         ('Experimental_factor', 'HAS_PARENT', 'Experimental_factor'), ('Units', 'HAS_PARENT', 'Units'),
-         ('Transcript', 'LOCATED_IN', 'Chromosome'), ('Known_variant', 'VARIANT_FOUND_IN_CHROMOSOME', 'Chromosome'),
-         ('Known_variant', 'VARIANT_FOUND_IN_GENE', 'Gene'), ('Drug', 'CURATED_TARGETS', 'Gene'),
-         ('Gene', 'TRANSCRIBED_INTO', 'Transcript'), ('Peptide', 'BELONGS_TO_PROTEIN', 'Protein'),
-         ('Transcript', 'TRANSLATED_INTO', 'Protein'), ('Gene', 'TRANSLATED_INTO', 'Protein'),
-         ('Known_variant', 'VARIANT_FOUND_IN_PROTEIN', 'Protein'), ('Protein', 'CURATED_INTERACTS_WITH', 'Protein'),
-         ('Protein', 'COMPILED_INTERACTS_WITH', 'Protein'), ('Drug', 'ACTS_ON', 'Protein'),
-         ('Protein', 'ACTS_ON', 'Protein'), ('Drug', 'COMPILED_TARGETS', 'Protein'),
-         ('Functional_region', 'FOUND_IN_PROTEIN', 'Protein'),
-         ('Analytical_sample', 'HAS_QUANTIFIED_PROTEIN', 'Protein'), ('Metabolite', 'ASSOCIATED_WITH', 'Protein'),
-         ('Modified_protein', 'IS_SUBSTRATE_OF', 'Protein'),
-         ('Known_variant', 'CURATED_AFFECTS_INTERACTION_WITH', 'Protein'),
-         ('Protein', 'HAS_SEQUENCE', 'Amino_acid_sequence'), ('User', 'IS_RESPONSIBLE', 'Project'),
-         ('User', 'PARTICIPATES_IN', 'Project'), ('Biological_sample', 'BELONGS_TO_SUBJECT', 'Subject'),
-         ('Project', 'HAS_ENROLLED', 'Subject'), ('Biological_sample', 'SPLITTED_INTO', 'Analytical_sample'),
-         ('Protein', 'HAS_MODIFIED_SITE', 'Modified_protein'),
-         ('Analytical_sample', 'HAS_QUANTIFIED_MODIFIED_PROTEIN', 'Modified_protein'),
-         ('Peptide', 'HAS_MODIFIED_SITE', 'Modified_protein'), ('Clinical_variable', 'HAS_PARENT', 'Clinical_variable'),
-         ('Experimental_factor', 'MAPS_TO', 'Clinical_variable'), ('Protein', 'IS_SUBUNIT_OF', 'Complex'),
-         ('Drug', 'TARGETS_CLINICALLY_RELEVANT_VARIANT', 'Clinically_relevant_variant'),
-         ('Known_variant', 'VARIANT_IS_CLINICALLY_RELEVANT', 'Clinically_relevant_variant'),
-         ('Drug', 'MENTIONED_IN_PUBLICATION', 'Publication'), ('Disease', 'MENTIONED_IN_PUBLICATION', 'Publication'),
-         ('Cellular_component', 'MENTIONED_IN_PUBLICATION', 'Publication'),
-         ('Protein', 'MENTIONED_IN_PUBLICATION', 'Publication'), ('Tissue', 'MENTIONED_IN_PUBLICATION', 'Publication'),
-         ('Functional_region', 'MENTIONED_IN_PUBLICATION', 'Publication'),
-         ('GWAS_study', 'PUBLISHED_IN', 'Publication'), ('Modified_protein', 'MENTIONED_IN_PUBLICATION', 'Publication'),
-         ('Protein', 'HAS_STRUCTURE', 'Protein_structure'), ('Known_variant', 'VARIANT_FOUND_IN_GWAS', 'GWAS_study'),
-         ('Metabolite', 'ANNOTATED_IN_PATHWAY', 'Pathway'), ('Protein', 'ANNOTATED_IN_PATHWAY', 'Pathway'),
-         ('Drug', 'INTERACTS_WITH', 'Drug')]
         print("Start loading node types")
-        # self.node_types = self.query_all_node_types()
+        self.node_types = self.query_all_node_types()
         print("Loaded node types")
         print("Start loading edge types")
-        # self.edge_types = self.query_all_edge_types()
+        self.edge_types = self.query_all_edge_types()
         print("Loaded edge types")
         print(self.node_types)
         print(self.edge_types)
