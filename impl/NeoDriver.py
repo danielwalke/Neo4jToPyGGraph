@@ -1,4 +1,3 @@
-##TODO Remove limits
 class NeoDriver:
     """
         This is the object for connecting to the neo4j database and querying all required data
