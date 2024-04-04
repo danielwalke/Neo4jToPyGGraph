@@ -1,3 +1,4 @@
+##TODO Remove limits
 class NeoDriver:
     """
         This is the object for connecting to the neo4j database and querying all required data
@@ -8,6 +9,7 @@ class NeoDriver:
             database: str
                 A string that represents the name of the neo4j database we want to query
         """
+
     def __init__(self, driver):
         self.driver = driver
         self.database = "neo4j"
@@ -27,12 +29,10 @@ class NeoDriver:
         node_types: list[str]
             Returns all node types the database
         """
-        ##TODO Remove limits
         records, _, _ = self.driver.execute_query(
             """
                 MATCH (n)
                 WITH DISTINCT labels(n) AS node_type
-                LIMIT 10
                 RETURN node_type
             """,
             database_=self.database,
@@ -48,18 +48,16 @@ class NeoDriver:
                 edge_types: list[tuple]
                     Returns all edge types the database
                 """
-        ##TODO Remove limits
         records, _, _ = self.driver.execute_query(
             """
                 MATCH (source)-[r]->(target)
                 WITH DISTINCT labels(source) AS source_type, type(r) AS edge_type, labels(target) AS target_type
-                LIMIT 2
                 RETURN source_type,edge_type, target_type
             """,
             database_=self.database,
         )
         edge_types = list(map(lambda record: (record.data()["source_type"][0], record.data()["edge_type"],
-                                                   record.data()["target_type"][0]), records))
+                                              record.data()["target_type"][0]), records))
         return edge_types
 
     def query_node_ids_per_type(self, node_type):
@@ -77,7 +75,6 @@ class NeoDriver:
             f"""
                 MATCH (n:{node_type})
                 WITH id(n) AS node_id
-                LIMIT 10
                 RETURN node_id
             """,
             database_=self.database,
@@ -100,7 +97,6 @@ class NeoDriver:
             f"""
                 MATCH (n:{node_type})
                 WITH properties(n) AS node_features
-                LIMIT 10
                 RETURN node_features
             """,
             database_=self.database,
@@ -132,5 +128,5 @@ class NeoDriver:
             """,
             database_=self.database,
         )
-        edge_index = list(map(lambda record: record.data()["edge_index"][0], records))
+        edge_index = list(map(lambda record: record.data()["edge_index"], records))[0]
         return edge_index

@@ -54,12 +54,13 @@ class Graph:
         self.edge_index_dict[key] = edge_index
 
     def __str__(self):
-        ##TODO
         """
         Just returns the graph object a s string
         :return: the graph as a string format
         """
-        print(self.ids_dict)
-        print(self.feature_dict)
-        print(self.edge_index_dict)
-        return ""
+        ids_dict_summary = {node_type: len(self.ids_dict[node_type]) for node_type in self.ids_dict}
+        feature_dict_summary = {node_type: len(self.feature_dict[node_type]) for node_type in self.feature_dict}
+        edge_index_dict_summary = {edge_type: len(self.edge_index_dict[edge_type]) for edge_type in self.edge_index_dict}
+        return f"""
+        Heterogeneous Graph(ids_dict: {ids_dict_summary}, feature_dict: {feature_dict_summary}, edge_index_dict: {edge_index_dict_summary})
+        """
