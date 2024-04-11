@@ -120,7 +120,7 @@ class NeoDriver:
         records, _, _ = self.driver.execute_query(
             f"""
                 MATCH(source:{source})-[r:{edge}]->(target:{target})
-                WITH COLLECT(distinct[id(startNode(r)), id(endNode(r))]) as edge_index
+                WITH COLLECT([id(startNode(r)), id(endNode(r))]) as edge_index
                 UNWIND edge_index AS edge
                 WITH COLLECT(edge[0]) as source, COLLECT(edge[1]) as target
                 RETURN [source, target] as edge_index
